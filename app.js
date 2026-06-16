@@ -8,7 +8,7 @@ const app = express();
 
 app.use(express.json({ limit: "5mb" }));
 
-app.use(authenticate);
+// app.use(authenticate);
 app.use(apiLimiter);
 
 app.get("/", (req, res) => {
