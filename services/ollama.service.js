@@ -18,3 +18,20 @@ export const generateResponse = async (text) => {
 
   return data.response;
 };
+
+export const chat = async (prompt) => {
+  const response = await axios.post(
+    env.LLAMA_API_ENDPOINT,
+    {
+      model: "qwen2.5:7b",
+      prompt,
+      stream: true,
+      keep_alive: "24h",
+    },
+    {
+      responseType: "stream",
+    }
+  );
+
+  return response.data;
+};
