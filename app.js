@@ -5,7 +5,7 @@ import { authenticate } from "./middlewares/auth.middleware.js";
 import { apiLimiter } from "./middlewares/rateLimit.middleware.js";
 
 const app = express();
-
+app.set("trust proxy", 1);
 app.use(express.json({ limit: "5mb" }));
 
 // app.use(authenticate);
