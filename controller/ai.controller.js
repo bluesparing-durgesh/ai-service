@@ -1,4 +1,4 @@
-import { generateResponse } from "../services/ollama.service.js";
+import { chat, generateResponse } from "../services/ollama.service.js";
 
 export const callModel = async (req, res) => {
   try {
