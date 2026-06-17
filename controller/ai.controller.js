@@ -58,8 +58,7 @@ export const chatController = async (req, res) => {
 
       if (toolCall.function.name === "web_search") {
         const query = toolCall.function.arguments.query;
-        console.log(`🚀 Triggering Tavily Search for: "${query}"`);
-
+     
         // A. Run your Tavily function
         const searchResults = await web_search(query);
 
@@ -70,8 +69,7 @@ export const chatController = async (req, res) => {
           content: JSON.stringify(searchResults) // Provide the findings
         });
 
-        console.log("🔄 Piping final response stream from Ollama...");
-        
+     
         // C. Request the final streaming response with the loaded context
         const finalStream = await chat(messages, model, true);
         

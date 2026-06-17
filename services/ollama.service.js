@@ -48,7 +48,7 @@ export const chat = async (messages, model = models.model1, stream = true) => {
 
     return response.data;
   } catch (error) {
-    console.error("❌ OLLAMA API ERROR DETECTED:");
+  
     if (error.response && stream && typeof error.response.data.on === "function") {
       error.response.data.on("data", (chunk) => {
         console.error("Error Reason from Ollama:", chunk.toString());

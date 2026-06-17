@@ -26,7 +26,7 @@ export async function web_search(query,retries = 2) {
          
         }
     } catch (error) {
-      console.log(`Attempt ${attempt + 1} failed:`, error.code, error.response?.status, error.response?.data || error.message);
+
       if (attempt === retries) throw error; // out of retries, give up for real
       await new Promise((r) => setTimeout(r, 1000 * (attempt + 1))); // wait a bit longer each retry
     }
