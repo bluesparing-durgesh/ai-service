@@ -1,9 +1,10 @@
 import axios from "axios";
 import { env } from "../config/env.js";
+import { tools } from "./tool.services.js";
 
-const models ={
-  model1:"qwen3:8b",
-  model2:"deepseek-r1:8b"
+const models = {
+  model1: "qwen3:8b",
+  model2: "deepseek-r1:8b"
 }
 export const generateResponse = async (text) => {
   const prompt = text;
@@ -24,13 +25,15 @@ export const generateResponse = async (text) => {
 };
 
 
-export const chat = async (prompt,model=models.model2) => {
+
+export const chat = async (prompt, model = models.model2) => {
   const response = await axios.post(
     env.LLAMA_API_ENDPOINT,
     {
       model: model,
-      prompt,
+      messages:[{role:"user",content:prompt}],
       stream: true,
+      tools,
       keep_alive: "24h",
     },
     {

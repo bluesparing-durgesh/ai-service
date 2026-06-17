@@ -52,6 +52,8 @@ export const chatController = async (req, res) => {
     const stream = await chat(prompt,model);
 
     res.setHeader("Content-Type", "application/x-ndjson");
+    res.setHeader("Cache-Control", "no-cache");
+    res.setHeader("Connection", "keep-alive");
 
     stream.pipe(res);
   } catch (error) {
@@ -63,3 +65,5 @@ export const chatController = async (req, res) => {
     });
   }
 };
+// Le6A.Eb4iP@NjvJ
+
