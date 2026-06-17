@@ -31,7 +31,8 @@ export const chat = async (prompt, model = models.model2) => {
     env.LLAMA_API_ENDPOINT,
     {
       model: model,
-      messages:[{role:"user",content:prompt}],
+      // messages:[{role:"user",content:prompt}],
+      prompt,
       stream: true,
       tools,
       keep_alive: "24h",
