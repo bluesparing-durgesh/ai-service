@@ -35,7 +35,7 @@ export const callModel = async (req, res) => {
 
 export const chatController = async (req, res) => {
   try {
-    const { prompt } = req.body;
+    const { prompt,model } = req.body;
 
     if (!prompt) {
       return res.status(400).json({
@@ -49,7 +49,7 @@ export const chatController = async (req, res) => {
         message: "Prompt too large",
       });
     }
-    const stream = await chat(prompt);
+    const stream = await chat(prompt,model);
 
     res.setHeader("Content-Type", "application/x-ndjson");
 
