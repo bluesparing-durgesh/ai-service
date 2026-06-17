@@ -28,6 +28,7 @@ export const generateResponse = async (text) => {
 
 export const chat = async (prompt, model = models.model1) => {
 try {
+  console.log("prompt",prompt);
     const response = await axios.post(
     env.LLAMA_API_ENDPOINT,
     {
