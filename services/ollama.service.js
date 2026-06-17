@@ -44,7 +44,7 @@ try {
 
   return response.data;
 } catch (error) {
-  onsole.error("❌ OLLAMA API ERROR DETECTED:");
+  console.error("❌ OLLAMA API ERROR DETECTED:");
     
     // If it's a stream error, we must read the stream chunks to see the error text
     if (error.response && error.response.data) {
