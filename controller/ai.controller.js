@@ -1,3 +1,4 @@
+import { web_search } from "../config/webSearch.js";
 import { chat, generateResponse } from "../services/ollama.service.js";
 
 export const callModel = async (req, res) => {
