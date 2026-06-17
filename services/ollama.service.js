@@ -26,36 +26,36 @@ export const generateResponse = async (text) => {
 
 
 
-export const chat = async (prompt, model = models.model1) => {
-try {
+
+export const chat = async (messages, model = models.model1, stream = true) => {
+  try {
+    const targetUrl = env.LLAMA_API_ENDPOINT;
 
     const response = await axios.post(
-    env.LLAMA_API_ENDPOINT,
-    {
-      model: model,
-      messages:[{ role: "user", content: prompt }],
-      stream: true,
-      tools:tools,
-      keep_alive: "24h",
-    },
-    {
-      responseType: "stream",
-    }
-  );
+      targetUrl,
+      {
+        model,
+        messages, 
+        stream,   
+        tools,
+        keep_alive: "24h",
+      },
+      {
+        
+        responseType: stream ? "stream" : "json",
+      }
+    );
 
-  return response.data;
-} catch (error) {
-  console.error("❌ OLLAMA API ERROR DETECTED:");
-    
-    // If it's a stream error, we must read the stream chunks to see the error text
-    if (error.response && error.response.data) {
-      error.response.data.on('data', (chunk) => {
+    return response.data;
+  } catch (error) {
+    console.error("❌ OLLAMA API ERROR DETECTED:");
+    if (error.response && stream && typeof error.response.data.on === "function") {
+      error.response.data.on("data", (chunk) => {
         console.error("Error Reason from Ollama:", chunk.toString());
       });
     } else {
-      console.error(error.message);
+      console.error(error.response?.data || error.message);
     }
-  throw error;
-
-}
+    throw error;
+  }
 };
